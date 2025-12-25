@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment-9</title>
+    <!-- * Google Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- * font awesome link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- * sweetAlert2 Liberary cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <!-- * Bootstrap Css Link -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <!-- * Main Template Css Link -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
+      <div class="container-fluid px-lg-5">
+        <!-- Left side (Logo + Name) -->
+        <div class="navbar-brand d-flex align-items-center gap-3">
+          <div
+            class="logo text-white rounded-4 d-flex align-items-center justify-content-center"
+          >
+            <i class="fa-solid fa-address-book fs-5"></i>
+          </div>
+          <div>
+            <h1 class="m-0 fw-bolder fs-4">Contact<span>Hub</span></h1>
+            <small class="text-secondary d-block fw-semibold desc"
+              >Smart Contact Manager</small
+            >
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="d-flex align-items-center gap-3 ms-auto">
+          <!-- Add Contact Button -->
+          <button
+            class="btn btn-primary text-white rounded-4 d-none d-sm-block add-btn fw-bolder"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <i class="fa-solid fa-plus"></i> Add Contact
+          </button>
+          <button
+            class="btn btn-primary text-white rounded-4 d-sm-none add-btn fw-bolder"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <i class="fa-solid fa-plus"></i> Add
+          </button>
+
+          <!-- Notification & Settings Icons -->
+          <span
+            class="d-none d-sm-block text-muted curser-pointer icon-profile p-2 rounded-3"
+          >
+            <i class="fa-solid fa-bell"></i>
+          </span>
+          <span
+            class="d-none d-sm-block text-muted curser-pointer icon-profile p-2 rounded-3"
+          >
+            <i class="fa-solid fa-gear"></i>
+          </span>
+
+          <!-- Profile Image -->
+          <img
+            src="./images/avatar-4.jpg"
+            alt="profile"
+            class="rounded-4 profile-image"
+          />
+        </div>
+      </div>
+    </nav>
+
+    <main class="mt-5 pt-5">
+      <header>
+        <div class="container-fluid px-md-5 pt-4">
+          <div class="row row-cols-2 row-cols-md-3 g-3 g-lg-4">
+            <div class="col">
+              <div
+                class="inner p-3 bg-white rounded-4 d-flex align-items-center gap-3"
+              >
+                <div class="total-icon rounded-4 text-white">
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <div>
+                  <small class="text-secondary fw-bold d-block">TOTAL</small>
+                  <strong
+                    id="totalCount"
+                    class="fw-bolder d-block fs-4"
+                  ></strong>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div
+                class="inner p-3 bg-white rounded-4 d-flex align-items-center gap-3"
+              >
+                <div class="fav-icon rounded-4 text-white">
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div>
+                  <small class="text-secondary fw-bold d-block"
+                    >FAVORITES</small
+                  >
+                  <strong
+                    class="fw-bolder d-block fs-4"
+                    id="is-favorite"
+                  ></strong>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div
+                class="inner p-3 bg-white rounded-4 d-flex align-items-center gap-3"
+              >
+                <div class="emergency-icon rounded-4 text-white">
+                  <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div>
+                  <small class="text-secondary fw-bold d-block"
+                    >EMERGENCY</small
+                  >
+                  <strong
+                    class="fw-bolder d-block fs-4"
+                    id="is-emergency"
+                  ></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="my-5">
+        <div class="container-flued px-4 px-lg-5">
+          <div class="row position-relative">
+            <div class="col-xl-8">
+              <div>
+                <h2 class="fw-bolder">All Contacts</h2>
+                <p class="text-muted" id="allContDescription">
+                  <!-- Manage and organize your 4 contacts -->
+                </p>
+              </div>
+              <input
+                oninput="search(this.value)"
+                type="search"
+                id="searchInput"
+                class="form-control my-3 p-3 rounded-4"
+                placeholder="🔎 Search by Name , Phone or Email......"
+              />
+              <div id="profileCard" class="row row-cols-1 row-cols-md-2">
+                <!-- <div class="col pb-4 card-profile">
+                  <div class="Inner p-2 bg-white rounded-4">
+                    <div class="head d-flex align-items-center">
+                      <div
+                        class="position-relative profile-icon rounded-4 py-3 px-4 me-3 text-white fs-5"
+                      >
+                        A
+                        <span
+                          class="d-none icon-absolute position-absolute d-flex align-items-center justify-content-center rounded-circle top-0 end-0 bg-warning text-white"
+                        >
+                          <i class="fa-solid fa-star"></i>
+                        </span>
+                        <span
+                          class="d-none icon-absolute position-absolute d-flex align-items-center justify-content-center rounded-circle bottom-0 end-0 bg-danger text-white"
+                        >
+                          <i class="fa-solid fa-heart-pulse"></i>
+                        </span>
+                      </div>
+                      <div>
+                        <div class="name mb-2 fw-bold fs-5">static name</div>
+                        <div class="phone">
+                          <span class="profile-phone-icon p-1 rounded-2"
+                            ><i class="fa-solid fa-phone small"></i
+                          ></span>
+                          <span class="profile-phone"> 01000000000</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="body my-3">
+                      <div class="d-flex align-items-center column-gap-2">
+                        <p class="mail-icon">
+                          <i class="fa-solid fa-envelope"></i>
+                        </p>
+                        <p class="mail-desc">ahmed@gmail.com</p>
+                      </div>
+                      <div class="d-flex align-items-center column-gap-2">
+                        <p class="loc-icon">
+                          <i class="fa-solid fa-location-dot"></i>
+                        </p>
+                        <p class="loc-desc">static loc</p>
+                      </div>
+                      <span
+                        class="category loc-icon loc-desc px-2 py-1 fw-normal"
+                      >
+                        friends
+                      </span>
+                      <span
+                        class="d-none emergency px-2 py-1 fw-normal text-danger ms-1"
+                      >
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        Emergency
+                      </span>
+                    </div>
+                    <div
+                      class="footer d-flex justify-content-between mt-4 border-top"
+                    >
+                      <div>
+                        <span class="phone-icon">
+                          <i class="fa-solid fa-phone"></i
+                        ></span>
+                        <span class="mail-icon">
+                          <i class="fa-solid fa-envelope"></i
+                        ></span>
+                      </div>
+
+                      <div class="d-flex column-gap-3 pe-2">
+                        <button class="border-0 p-1 star-icon icon">
+                          <i class="fa-regular fa-star"></i>
+                        </button>
+                        <button class="border-0 p-1 heart-icon icon">
+                          <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <button class="border-0 p-1 pen-icon icon">
+                          <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="border-0 p-1 trash-icon icon">
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+
+            <aside class="col-xl-4">
+              <div class="aside-sticky">
+                <section class="favorites rounded-4 border my-4">
+                  <div
+                    class="head p-3 rounded-top-4 d-flex align-items-center column-gap-3"
+                  >
+                    <div class="text-white favorites-icon my-icon rounded-3">
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="">
+                      <h2 class="fs-6 m-0">Favorites</h2>
+                      <p class="desc">Quick access to starred contacts</p>
+                    </div>
+                  </div>
+
+                  <div class="row p-3" id="dFavoriteProducts">
+                    <!-- <div class="py-5">
+                      <p class="text-center text-muted fw-semibold">
+                        No Favorites Yet
+                      </p>
+                    </div> -->
+                    <!-- <div class="p-3 row row-cols-2 row-cols-xl-1">
+                      <div
+                        style="background-color: rgb(248, 243, 243)"
+                        class="box d-flex px-2 rounded-3 cursor-pointer justify-content-between align-items-center"
+                      >
+                        <div class="d-flex column-gap-2 align-items-center">
+                          <div
+                            class="bg-info rounded-3 d-flex align-items-center justify-content-center text-white"
+                            style="width: 40px; height: 40px"
+                          >
+                            A
+                          </div>
+                          <div>
+                            <h4 class="mb-0 small fw-bold pt-2">Static Name</h4>
+                            <p class="phoneNumber small text-secondary">
+                              01000000000
+                            </p>
+                          </div>
+                        </div>
+                        <button
+                          class="call-icon border-0 rounded-3 d-flex justify-content-center align-items-center"
+                        >
+                          <i class="fa-solid fa-phone"></i>
+                        </button>
+                      </div>
+                    </div> -->
+                  </div>
+                </section>
+                <section class="Emergency rounded-4 border">
+                  <div
+                    class="head p-3 rounded-top-4 d-flex align-items-center column-gap-3"
+                  >
+                    <div
+                      class="text-white favorites-icon my-icon rounded-3"
+                      style="background-color: #f40539"
+                    >
+                      <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div class="">
+                      <h2 class="fs-6 m-0">Emergency</h2>
+                      <p class="desc">Important contacts for urgent calls</p>
+                    </div>
+                  </div>
+                  <div class="row p-3" id="dEmergencyProducts">
+                    <!-- <div class="py-5 d-block">
+                      <p class="text-center text-muted fw-semibold">
+                        No Emergency Content
+                      </p>
+                    </div> -->
+                    <!-- <div class="p-3  row row-cols-2 row-cols-xl-1">
+                  </div>
+                    <div
+                      style="background-color: rgb(248, 243, 243)"
+                      class="box d-flex px-2 rounded-3 cursor-pointer justify-content-between align-items-center"
+                    >
+                      <div class="d-flex column-gap-2 align-items-center">
+                        <div
+                          class="bg-info rounded-3 d-flex align-items-center justify-content-center text-white"
+                          style="width: 40px; height: 40px"
+                        >
+                          A
+                        </div>
+                        <div>
+                          <h4 class="mb-0 small fw-bold pt-2">Static Name</h4>
+                          <p class="phoneNumber small text-secondary">
+                            01000000000
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        class="call-emergenct-icon border-0 rounded-3 d-flex justify-content-center align-items-center"
+                      >
+                        <i class="fa-solid fa-phone"></i>
+                      </button>
+                    </div>-->
+                  </div>
+                </section>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!--! Modal -->
+    <div
+      class="modal fade my-5 py-5"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="addNewContactMsg"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-4 fw-bolder" id="addNewContactMsg">
+              Add New Contact
+            </h2>
+            <h2 class="modal-title fs-4 fw-bolder d-none" id="EditContactMsg">
+              Edit Contact
+            </h2>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- * Image -->
+            <div
+              style="width: 100px; height: 100px"
+              class="my-2 mx-auto d-flex justify-content-center align-items-center rounded-circle overflow-hidden"
+            >
+              <img
+                id="imageLivePrev"
+                src="./images/default.png"
+                alt="user"
+                class="w-100 h-100"
+              />
+            </div>
+            <input type="file" class="form-control" id="imageInput" hidden />
+            <label for="imageInput" class="changePhoto p-2 rounded-3"
+              ><i class="fa-solid fa-camera text-secondary"></i> choose
+              Photo</label
+            >
+
+            <!-- * full Name -->
+            <div class="mb-3">
+              <label class="form-label required-label">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productNameInput"
+                placeholder="Enter full name"
+                required
+                oninput="validation(this , 'nameMsg')"
+              />
+              <p class="text-danger small d-none" id="nameMsg">
+                Name should contain only letters and spaces (2-50 characters)
+              </p>
+            </div>
+            <!-- * Phone Number -->
+
+            <div class="mb-3">
+              <label class="form-label required-label">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="productPhoneInput"
+                placeholder="e.g., 01012345678"
+                required
+                oninput="validation(this , 'phoneMsg')"
+              />
+              <p class="text-danger small d-none" id="phoneMsg">
+                Please enter a valid Egyptian phone number
+              </p>
+            </div>
+            <!-- * Email Address -->
+            <div class="mb-3">
+              <label class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="productEmailInput"
+                placeholder="name@example.com"
+                oninput="validation(this , 'emailMsg')"
+              />
+              <p class="text-danger small d-none" id="emailMsg">
+                Please enter a valid email address
+              </p>
+            </div>
+            <!-- * Address  -->
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productAddressInput"
+                placeholder="Enter address"
+              />
+            </div>
+            <!-- * Group -->
+            <div class="mb-3">
+              <label class="form-label">Group</label>
+              <select class="form-select cursor-pointer" id="productGroupInput">
+                <option selected disabled value="">Select a group</option>
+                <option value="Family">Family</option>
+                <option value="Friends">Friends</option>
+                <option value="Work">Work</option>
+                <option value="school">school</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <!-- * Notes -->
+            <div class="mb-3">
+              <label class="form-label">Notes</label>
+              <textarea
+                class="form-control"
+                id="productNotesInput"
+                rows="2"
+                placeholder="Add Notes About This Contact"
+              ></textarea>
+            </div>
+            <!-- * Favorites And Emergency -->
+            <div class="d-flex column-gap-2">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="productFavInput"
+                />
+                <label class="form-check-label" id="isFavoriteCheck">
+                  <span class="text-warning">★</span> Favorite
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="productEmergencyInput"
+                />
+                <label class="form-check-label">
+                  <span class="text-danger">♥</span> Emergency
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- * buttons (cancle And Save Contact) -->
+          <div class="row row-cols-1 row-cols-md-2 p-3">
+            <div class="p-2">
+              <button
+                type="button"
+                class="btn m-0 w-100 border-0 py-2 rounded-4 text-black me-4"
+                data-bs-dismiss="modal"
+                style="
+                  background-color: rgb(250, 244, 244);
+                  color: rgb(110, 107, 107);
+                "
+              >
+                Cancel
+              </button>
+            </div>
+            <div class="p-2">
+              <button
+                onclick="addProduct()"
+                id="saveBtn"
+                type="button"
+                class="text-white m-0 w-100 rounded-4 add-btn fw-bolder"
+              >
+                <i class="fa-solid fa-check"></i> Save Contact
+              </button>
+              <button
+                onclick="updateProduct()"
+                id="updateBtn"
+                type="button"
+                class="d-none text-white m-0 w-100 rounded-4 add-btn fw-bolder"
+              >
+                <i class="fa-solid fa-check"></i> Update Contact
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- * weetAlert liberary link -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- * Bootstrap Js Link -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- * Main Template Js Link -->
+    <script src="./js/main.js"></script>
+  </body>
+</html>

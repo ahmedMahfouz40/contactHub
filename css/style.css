@@ -1,0 +1,257 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Inter", sans-serif;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+/* ================= */
+.logo {
+  width: 45px;
+  height: 45px;
+  background-color: #702dfc;
+}
+nav h1 > span {
+  color: #7f22fe;
+}
+.profile-image {
+  width: 45px;
+  height: 45px;
+}
+.add-btn {
+  border: none;
+  padding: 12px 13px;
+  background-color: #7928fd;
+  transition: 0.2s;
+}
+nav .add-btn:hover {
+  box-shadow: 0 1px 5px #7d4ec7;
+  transform: translateY(-3px);
+}
+.icon-profile:hover {
+  background-color: whitesmoke;
+  color: black !important;
+}
+nav .desc {
+  font-size: 12px;
+}
+main {
+  background-color: #f8fafc;
+}
+.total-icon {
+  background-color: #1b68fe;
+}
+.fav-icon {
+  background-color: #ff8700;
+}
+.emergency-icon {
+  background-color: #f0002f;
+}
+.row .col .inner {
+  border: 2px solid rgb(245, 240, 240);
+  transition: 0.2s;
+}
+.row .col .inner:hover {
+  box-shadow: 0 5px 10px 0px rgb(231, 224, 224);
+}
+.row .col .inner div:first-child {
+  padding: 14px 16px;
+}
+
+.profile-icon {
+  background-color: #396dd6;
+  width: 60px;
+  height: 60px;
+  }
+.card-profile .profile-phone-icon {
+  font-size: 14px;
+  background-color: #cbdaf7;
+  color: blue;
+}
+.profile-phone {
+  color: rgb(153, 150, 150);
+  font-size: 14px;
+  font-weight: 500;
+}
+.body .mail-icon {
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 2px 3px;
+  background-color: rgb(248, 224, 248);
+  color: purple;
+}
+.body .mail-desc,
+.body .loc-desc {
+  font-size: 14px;
+  color: rgb(124, 124, 124);
+  font-weight: 500;
+}
+.body .loc-icon {
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 2px 3px;
+  color: green;
+  background-color: rgb(210, 252, 210);
+}
+.footer .phone-icon {
+  background-color: #edf0f5;
+  color: green;
+  padding: 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+
+}
+.footer .phone-icon:hover {
+  background-color: #cbdaf7;
+}
+.footer .mail-icon {
+  font-size:0.8rem;
+  background-color: #edf0f5;
+  color: purple;
+  padding: 7px;
+  border-radius: 5px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+.footer .mail-icon:hover {
+  background-color: #cbdaf7;
+  color: gold;
+}
+.card-profile .footer {
+  background-color: #f8f9fa;
+  padding: 15px 1px;
+}
+.footer .icon {
+  cursor: pointer;
+  color: rgb(112, 109, 109);
+  border-radius: 8px;
+  padding: 3px;
+}
+.star-icon:hover {
+  background-color: rgb(237, 248, 137);
+  color: gold;
+}
+
+.heart-icon:hover {
+  background-color: #f59393;
+  color: red;
+}
+.pen-icon:hover {
+  background-color: rgb(241, 238, 238);
+  color: rgb(63, 63, 236);
+}
+.trash-icon:hover {
+  background-color: rgb(247, 232, 232);
+  color: red;
+}
+.card-profile .Inner {
+  border: 2px solid rgb(238, 231, 231);
+  transition: 0.2s;
+}
+.card-profile .Inner:hover {
+  box-shadow: 0 5px 10px 2px gainsboro;
+}
+.icon-absolute {
+  border: 2px solid white;
+  font-size: 12px;
+  width: 28px;
+  height: 28px;
+  padding:2px 1px 0 0;
+}
+.icon-fav-absolute {
+  top: -4px;
+  right: -8px;
+}
+.icon-emer-absolute {
+  bottom: -4px;
+  right: -8px;
+}
+.emergency {
+  font-size: 12px;
+  border-radius: 10px;
+  background-color: rgb(236, 202, 202);
+}
+aside .my-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+}
+aside .my-icon.favorites-icon {
+  background-color: #ff8500;
+}
+aside .desc {
+  color: rgb(95, 92, 92);
+  font-size: 12px;
+}
+aside .head {
+  background-color: #f7eeee;
+}
+.call-icon {
+  width: 40px;
+  height: 40px;
+  color: green;
+  background-color: rgb(184, 245, 184);
+}
+.box:hover .call-icon {
+  background-color: rgb(34, 184, 34);
+  color: white;
+}
+.call-emergenct-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(241, 166, 166);
+  color: red;
+}
+.box:hover .call-emergenct-icon {
+  background-color: red;
+  color: white;
+}
+.aside-sticky {
+  position: -webkit-stick;
+  position: sticky;
+  top: 90px;
+}
+/* ========== */
+textarea {
+  resize: none;
+}
+.required-label::after {
+  content: " *";
+  color: red;
+}
+
+.form-control::placeholder {
+  color: #999;
+  font-size: 14px;
+  opacity: 1;
+  font-weight: 300;
+}
+#searchInput::placeholder {
+  font-size: 1.0625rem;
+  font-weight: 400;
+}
+.form-check-label {
+  font-weight: normal;
+}
+.bg-starCheck {
+  background-color: rgb(245, 255, 110);
+}
+.bg-emergencyCheck {
+  background-color: #f59393;
+}
+.changePhoto {
+  background-color: rgb(235, 229, 229);
+  cursor: pointer;
+  margin-block: 5px;
+  margin-left:50% ;
+  transform: translateX(-50%);
+}
