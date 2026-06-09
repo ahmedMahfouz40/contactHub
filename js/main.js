@@ -89,6 +89,19 @@ function addProduct() {
 // ? dispaly all products in html Page
 function displayProducts(arr = allProducts) {
   var htmlMarkup = "";
+  if (arr.length === 0) {
+    htmlMarkup = `
+   <div
+                  class="w-100 d-flex flex-column gap-3 justify-content-center p-5 align-items-center"
+                >
+                  <i
+                    style="background-color: rgb(240, 240, 240)"
+                    class="fa-regular text-secondary fs-1 rounded-2 p-1 fa-address-book"
+                  ></i>
+                  <p class="text-secondary fw-bold">No Contacts Yet</p>
+                </div>
+   `;
+  }
   for (var i = 0; i < arr.length; i++) {
     htmlMarkup += ` 
             <div class="col pb-4 card-profile">
@@ -162,12 +175,12 @@ function displayProducts(arr = allProducts) {
                       class="footer d-flex justify-content-between mt-4 border-top"
                     >
                       <div>
-                        <button class="phone-icon border-0" title="Call">
+                        <a href="tel:${arr[i].phone}" class="phone-icon border-0 text-decoration-none" title="Call">
                           <i class="fa-solid fa-phone"></i
-                        ></button>
-                        <button class="mail-icon border-0" title="Email">
+                        ></a>
+                        <a href="mailto:${arr[i].email}" class="mail-icon border-0 text-decoration-none" title="Email">
                           <i class="fa-solid fa-envelope"></i
-                        ></button>
+                        ></a>
                       </div>
 
                       <div class="d-flex column-gap-3 pe-2">
@@ -175,17 +188,19 @@ function displayProducts(arr = allProducts) {
                           <i onclick="toggleIconFav(this,'${
                             arr[i].id
                           }')" class=" ${
-      arr[i].isFavorite ? "fa-solid text-warning " : "fa-regular "
-    } fa-star"></i>
+                            arr[i].isFavorite
+                              ? "fa-solid text-warning "
+                              : "fa-regular "
+                          } fa-star"></i>
                             </button>
                             <button title="Emergency"   class="border-0 p-1 heart-icon  icon ">
                               <i  onclick="toggleIconEmer(this,'${
                                 arr[i].id
                               }')" class="${
-      arr[i].isEmergency
-        ? "fa-solid fa-heart-pulse text-danger"
-        : "fa-regular fa-heart"
-    } "></i> 
+                                arr[i].isEmergency
+                                  ? "fa-solid fa-heart-pulse text-danger"
+                                  : "fa-regular fa-heart"
+                              } "></i> 
                         </button>
                         <button 
                         title="Edit"  
@@ -239,15 +254,15 @@ function deleteProduct(id) {
 }
 // ? clear form after updating and addition and start Page
 function clearForm() {
-  productNameInput.value = null;
-  productPhoneInput.value = null;
-  productEmailInput.value = null;
-  productAddressInput.value = null;
-  productGroupInput.value = null;
-  productNotesInput.value = null;
+  productNameInput.value = "";
+  productPhoneInput.value = "";
+  productEmailInput.value = "";
+  productAddressInput.value = "";
+  productGroupInput.value = "";
+  productNotesInput.value = "";
   productFavInput.checked = false;
   productEmergencyInput.checked = false;
-  imageInput.value = null;
+  imageInput.value = "";
 }
 function search(term) {
   term = term.toLowerCase();
@@ -278,7 +293,7 @@ function setProductToUpdated(id) {
   productFavInput.checked = productToBeUpdated.isFavorite;
   imageLivePrev.setAttribute(
     "src",
-    productToBeUpdated.image || "./images/default.png"
+    productToBeUpdated.image || "./images/default.png",
   );
   productEmergencyInput.checked = productToBeUpdated.isEmergency;
 
@@ -377,7 +392,10 @@ function toggleIconEmer(element, id) {
   });
   findEmergencyItems.isEmergency = !findEmergencyItems.isEmergency;
 
-  if (element.classList.contains("fa-heart", "fa-regular")) {
+  if (
+    element.classList.contains("fa-heart") &&
+    element.classList.contains("fa-regular")
+  ) {
     element.classList.replace("fa-heart", "fa-heart-pulse");
     element.classList.replace("fa-regular", "fa-solid");
     element.classList.add("text-danger");
@@ -424,11 +442,12 @@ function displayFavoritesProducts() {
                           </p>
                         </div>
                       </div>
-                      <button
-                        class="call-icon border-0 rounded-3 d-flex justify-content-center align-items-center"
+                      <a
+                      href="tel:${filterdFavoriteProduct[i].phone}"
+                        class="call-icon  rounded-3 d-flex justify-content-center align-items-center text-decoration-none"
                       >
                         <i class="fa-solid fa-phone"></i>
-                      </button>
+                      </a>
                     </div>
                   </div>
 
@@ -479,11 +498,12 @@ function displayEmergencyProducts() {
                           </p>
                         </div>
                       </div>
-                      <button
+                      <a
+                       href="tel:${filterdEmergencyProduct[i].phone}"
                         class="call-emergenct-icon border-0 rounded-3 d-flex justify-content-center align-items-center"
                       >
                         <i class="fa-solid fa-phone"></i>
-                      </button>
+                      </a>
                     </div>
                   </div>
     `;
