@@ -501,7 +501,7 @@ function displayEmergencyProducts() {
                       </div>
                       <a
                        href="tel:${filterdEmergencyProduct[i].phone}"
-                        class="call-emergenct-icon border-0 rounded-3 d-flex justify-content-center align-items-center"
+                        class="call-emergenct-icon border-0 rounded-3 d-flex justify-content-center text-decoration-none align-items-center"
                       >
                         <i class="fa-solid fa-phone"></i>
                       </a>
