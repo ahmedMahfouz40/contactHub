@@ -263,6 +263,7 @@ function clearForm() {
   productFavInput.checked = false;
   productEmergencyInput.checked = false;
   imageInput.value = "";
+  imageLivePrev.setAttribute("src", "./images/default.png");
 }
 function search(term) {
   term = term.toLowerCase();
